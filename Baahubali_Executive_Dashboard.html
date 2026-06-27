@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Baahubali Market Impact Dashboard</title>
+<style>
+  :root{
+    --navy:#071b2c; --blue:#0b2d46; --gold:#ffd166; --gold2:#fff3c4; --ink:#111827; --muted:#6b7280;
+    --bg:#f3f4f6; --card:#ffffff; --line:#d1d5db; --teal:#176b87; --orange:#f97316; --green:#16a34a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#eef2f7 0%,#f8fafc 100%);font-family:Segoe UI,Arial,sans-serif;color:var(--ink)}
+  .page{max-width:1480px;margin:0 auto;padding:24px}
+  .hero{background:linear-gradient(135deg,#04111f 0%,#0b2d46 65%,#102a43 100%);border-radius:18px;padding:24px 28px;color:#fff;box-shadow:0 12px 32px rgba(7,27,44,.20);position:relative;overflow:hidden}
+  .hero:after{content:"";position:absolute;right:-90px;top:-130px;width:340px;height:340px;border-radius:50%;background:rgba(255,209,102,.16)}
+  .hero h1{margin:0;color:var(--gold);font-size:34px;letter-spacing:.7px;text-transform:uppercase}
+  .hero p{margin:8px 0 0;font-size:15px;color:#e5e7eb}
+  .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.badge{border:1px solid rgba(255,255,255,.25);padding:6px 10px;border-radius:999px;font-size:12px;color:#f9fafb;background:rgba(255,255,255,.08)}
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:18px 0}.kpi{background:var(--card);border-radius:14px;padding:14px 14px;border-top:5px solid var(--gold);box-shadow:0 6px 18px rgba(15,23,42,.08);min-height:108px}.kpi .label{font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:700;letter-spacing:.35px}.kpi .value{font-size:24px;font-weight:800;margin-top:10px;color:var(--navy)}.kpi .note{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.3}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:16px}.panel{background:#fff;border-radius:16px;padding:18px;box-shadow:0 8px 22px rgba(15,23,42,.08);border:1px solid #e5e7eb}.panel h2{font-size:17px;margin:0 0 12px;color:var(--navy)}.panel .caption{font-size:12px;color:var(--muted);margin-top:-6px;margin-bottom:12px}
+  .story{font-size:14px;line-height:1.65}.story strong{color:var(--navy)}
+  table{width:100%;border-collapse:collapse;font-size:12px}th{background:var(--blue);color:#fff;text-align:left;padding:9px;border:1px solid #123852}td{padding:8px;border:1px solid #e5e7eb}tbody tr:nth-child(even){background:#f9fafb}.num{text-align:right;font-variant-numeric:tabular-nums}.source{font-size:11px;color:var(--muted);line-height:1.45}.source a{color:#0f5d7e;text-decoration:none}
+  .barrow{display:grid;grid-template-columns:170px 1fr 84px;gap:10px;align-items:center;margin:11px 0}.barwrap{height:20px;background:#e5e7eb;border-radius:999px;overflow:hidden}.bar{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--teal),#219ebc)}.bar.orange{background:linear-gradient(90deg,var(--orange),#fb923c)}.bar.gold{background:linear-gradient(90deg,#f59e0b,var(--gold))}.bar.green{background:linear-gradient(90deg,#16a34a,#86efac)}
+  .stack{height:34px;border-radius:10px;overflow:hidden;display:flex;background:#e5e7eb;margin:10px 0}.seg-india{background:var(--teal);height:100%}.seg-overseas{background:var(--orange);height:100%}.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:8px}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px}.timeline{display:grid;grid-template-columns:70px 1fr;gap:12px}.tlitem{border-left:3px solid var(--gold);padding-left:12px;margin-bottom:12px}.tlitem b{color:var(--navy)}.big-note{background:#fff8d9;border:1px solid #fcd34d;border-radius:14px;padding:14px;font-size:12px;line-height:1.55;color:#374151}
+  .footer{font-size:11px;color:var(--muted);margin-top:18px;line-height:1.5}.full{grid-column:1 / -1}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.donut{display:flex;gap:18px;align-items:center}.donut svg{width:180px;height:180px}.centerText{font-size:14px;font-weight:800;fill:var(--navy);text-anchor:middle}.centerSub{font-size:8px;fill:var(--muted);text-anchor:middle}
+  @media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}.grid,.two{grid-template-columns:1fr}.page{padding:14px}.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <section class="hero">
+    <h1>Baahubali Market Impact Dashboard</h1>
+    <p>Prestige analytics view across box-office legacy, BB2 30-day domestic nett, market split, OTT revival signals and franchise storytelling.</p>
+    <div class="badges"><span class="badge">Currency: ₹ Crore</span><span class="badge">Domestic Nett separated from Worldwide Gross</span><span class="badge">No fabricated OTT viewership</span><span class="badge">Source-backed workbook project</span></div>
+  </section>
+
+  <section class="kpis">
+    <div class="kpi"><div class="label">Tracked Worldwide Gross</div><div class="value">₹2,490.21 Cr</div><div class="note">BB1 + BB2 + The Epic tracked gross</div></div>
+    <div class="kpi"><div class="label">Known Production Budget</div><div class="value">₹430.00 Cr</div><div class="note">BB1 + BB2 only; re-release/OTT budget not public</div></div>
+    <div class="kpi"><div class="label">Known-Budget ROI</div><div class="value">5.67x</div><div class="note">(BB1 + BB2 gross) / known budget</div></div>
+    <div class="kpi"><div class="label">BB2 30-Day Domestic Nett</div><div class="value">₹1,000.50 Cr</div><div class="note">Domestic nett only, not worldwide gross</div></div>
+    <div class="kpi"><div class="label">Torchbearer Episodes</div><div class="value">4</div><div class="note">Netflix documentary scope</div></div>
+    <div class="kpi"><div class="label">Avg Buzz Proxy Score</div><div class="value">85.5 / 100</div><div class="note">Qualitative media proxy; not raw social volume</div></div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>Executive Storyline</h2>
+      <p class="story"><strong>Baahubali is a franchise-market case, not just a film collection table.</strong> The Beginning created the pan-India base, The Conclusion scaled the franchise into a record-level commercial event, The Epic re-release proved nostalgia has measurable value, and The Torchbearer acts as an OTT brand-memory asset. The dashboard separates worldwide gross, domestic nett and qualitative buzz indicators so no metric is mixed or overstated.</p>
+    </div>
+    <div class="panel">
+      <h2>Franchise Timeline</h2>
+      <div class="timeline">
+        <div class="tlitem"><b>2015</b><br/>The Beginning<br/><span class="source">Pan-India foundation</span></div>
+        <div class="tlitem"><b>2017</b><br/>The Conclusion<br/><span class="source">Commercial scale-up</span></div>
+        <div class="tlitem"><b>2025</b><br/>The Epic<br/><span class="source">Nostalgia monetization</span></div>
+        <div class="tlitem"><b>2026</b><br/>The Torchbearer<br/><span class="source">OTT revival signal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>Film-Level Financial Performance</h2>
+      <div class="caption">Budget is shown only where reliable public data is included.</div>
+      <div class="barrow"><div>The Beginning - Gross</div><div class="barwrap"><div class="bar orange" style="width:36.35%"></div></div><div class="num">₹650.00</div></div>
+      <div class="barrow"><div>The Conclusion - Gross</div><div class="barwrap"><div class="bar orange" style="width:100%"></div></div><div class="num">₹1,788.06</div></div>
+      <div class="barrow"><div>The Epic - Gross</div><div class="barwrap"><div class="bar orange" style="width:2.92%"></div></div><div class="num">₹52.15</div></div>
+      <div class="barrow"><div>The Beginning - Budget</div><div class="barwrap"><div class="bar" style="width:10.07%"></div></div><div class="num">₹180.00</div></div>
+      <div class="barrow"><div>The Conclusion - Budget</div><div class="barwrap"><div class="bar" style="width:13.98%"></div></div><div class="num">₹250.00</div></div>
+      <table style="margin-top:14px"><thead><tr><th>Title</th><th class="num">Budget</th><th class="num">Worldwide Gross</th><th class="num">ROI</th></tr></thead><tbody><tr><td>The Beginning</td><td class="num">₹180.00 Cr</td><td class="num">₹650.00 Cr</td><td class="num">3.61x</td></tr><tr><td>The Conclusion</td><td class="num">₹250.00 Cr</td><td class="num">₹1,788.06 Cr</td><td class="num">7.15x</td></tr><tr><td>The Epic</td><td class="num">N/A</td><td class="num">₹52.15 Cr</td><td class="num">N/A</td></tr></tbody></table>
+    </div>
+    <div class="panel">
+      <h2>India vs Overseas Market Split</h2>
+      <div class="caption">Tracked gross split across included theatrical/re-release entries.</div>
+      <div class="donut">
+        <svg viewBox="0 0 42 42" aria-label="India vs Overseas share">
+          <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#e5e7eb" stroke-width="6"></circle>
+          <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#176b87" stroke-width="6" stroke-dasharray="79.22 20.78" stroke-dashoffset="25"></circle>
+          <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="#f97316" stroke-width="6" stroke-dasharray="20.78 79.22" stroke-dashoffset="-54.22"></circle>
+          <text x="21" y="20" class="centerText">79.22%</text><text x="21" y="25" class="centerSub">India Share</text>
+        </svg>
+        <div>
+          <div class="legend"><span><i class="dot" style="background:#176b87"></i>India: ₹1,972.80 Cr</span></div>
+          <div class="legend"><span><i class="dot" style="background:#f97316"></i>Overseas: ₹517.41 Cr</span></div>
+          <div class="legend"><span><i class="dot" style="background:#d1d5db"></i>Total: ₹2,490.21 Cr</span></div>
+        </div>
+      </div>
+      <table style="margin-top:12px"><thead><tr><th>Title</th><th class="num">India Gross</th><th class="num">Overseas Gross</th></tr></thead><tbody><tr><td>The Beginning</td><td class="num">₹516.00 Cr</td><td class="num">₹134.00 Cr</td></tr><tr><td>The Conclusion</td><td class="num">₹1,416.90 Cr</td><td class="num">₹371.16 Cr</td></tr><tr><td>The Epic</td><td class="num">₹39.90 Cr</td><td class="num">₹12.25 Cr</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel">
+      <h2>BB2 30-Day Domestic Nett - Territory Snapshot</h2>
+      <div class="caption">Reported 30-day domestic nett; control total = ₹1,000.50 Cr.</div>
+      <div class="barrow"><div>Hindi version</div><div class="barwrap"><div class="bar gold" style="width:100%"></div></div><div class="num">₹490.00</div></div>
+      <div class="barrow"><div>Nizam & Andhra Pradesh</div><div class="barwrap"><div class="bar gold" style="width:54.08%"></div></div><div class="num">₹265.00</div></div>
+      <div class="barrow"><div>Tamil Nadu</div><div class="barwrap"><div class="bar gold" style="width:21.22%"></div></div><div class="num">₹104.00</div></div>
+      <div class="barrow"><div>Karnataka & Mysore</div><div class="barwrap"><div class="bar gold" style="width:15.71%"></div></div><div class="num">₹77.00</div></div>
+      <div class="barrow"><div>Kerala</div><div class="barwrap"><div class="bar gold" style="width:11.22%"></div></div><div class="num">₹55.00</div></div>
+      <div class="barrow"><div>Dubbed balance</div><div class="barwrap"><div class="bar gold" style="width:1.94%"></div></div><div class="num">₹9.50</div></div>
+      <table style="margin-top:12px"><thead><tr><th>Territory / Segment</th><th class="num">Domestic Nett</th><th class="num">Share</th></tr></thead><tbody><tr><td>Hindi version</td><td class="num">₹490.00 Cr</td><td class="num">48.98%</td></tr><tr><td>Nizam & Andhra Pradesh</td><td class="num">₹265.00 Cr</td><td class="num">26.49%</td></tr><tr><td>Reported domestic total</td><td class="num">₹1,000.50 Cr</td><td class="num">100.00%</td></tr></tbody></table>
+    </div>
+    <div class="panel">
+      <h2>OTT / Franchise Revival Signals</h2>
+      <div class="caption">Qualitative proxy score; not private Netflix or social platform data.</div>
+      <div class="barrow"><div>Baahubali 3 speculation</div><div class="barwrap"><div class="bar green" style="width:92%"></div></div><div class="num">92</div></div>
+      <div class="barrow"><div>Positive fan reaction</div><div class="barwrap"><div class="bar green" style="width:88%"></div></div><div class="num">88</div></div>
+      <div class="barrow"><div>Release anticipation</div><div class="barwrap"><div class="bar green" style="width:82%"></div></div><div class="num">82</div></div>
+      <div class="barrow"><div>Re-release demand</div><div class="barwrap"><div class="bar green" style="width:80%"></div></div><div class="num">80</div></div>
+      <table style="margin-top:14px"><thead><tr><th>Signal Type</th><th class="num">Score</th><th>Note</th></tr></thead><tbody><tr><td>Baahubali 3 speculation</td><td class="num">92</td><td>Speculation only; not an official sequel announcement</td></tr><tr><td>Positive fan reaction</td><td class="num">88</td><td>Media coverage proxy</td></tr><tr><td>Release anticipation</td><td class="num">82</td><td>Media coverage proxy</td></tr><tr><td>Re-release demand</td><td class="num">80</td><td>Box-office proxy</td></tr></tbody></table>
+    </div>
+  </section>
+
+  <section class="grid">
+    <div class="panel full"><h2>Data Integrity Notes</h2><div class="big-note"><strong>Do not mix metric types.</strong> Worldwide gross, domestic gross, domestic nett and qualitative buzz are different measures. BB2 30-day territory numbers are domestic nett figures and are separated from worldwide gross. Known-budget ROI excludes budgets that are not reliably public. OTT buzz metrics are marked as qualitative proxies; no private Netflix viewership or unverified X/Twitter volume is fabricated.</div></div>
+  </section>
+  <div class="footer">Sources are maintained inside the Excel workbook Source_Register sheet. Key source types used: Sacnilk for consistent film gross/budget tables, Times of India citing BoxofficeIndia.com for BB2 30-day domestic nett territory snapshot, Netflix official page for Torchbearer metadata, and media coverage for qualitative buzz/proxy signals.</div>
+</div>
+</body>
+</html>
